@@ -3,7 +3,7 @@ node_modules
 npm-debug.log
 
 # Config file
-server/config.js
+**/server/config.js
 
 # Local development
 *.env
