@@ -1,18 +1,16 @@
 import React from "react";
-import { Link as RouterLink } from "react-router-dom";
 import { reduxForm, Field } from "redux-form";
 import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { signUp } from "../../actions";
+import { signIn } from "../../actions";
 
 const useStyles = (theme) => ({
   root: {
@@ -43,7 +41,7 @@ const useStyles = (theme) => ({
   },
 });
 
-class SignUp extends React.Component {
+class SignIn extends React.Component {
   renderError = ({ touched, error }) => {
     return touched && error ? true : false;
   };
@@ -53,7 +51,7 @@ class SignUp extends React.Component {
   };
 
   onSubmit = (formValues) => {
-    this.props.signUp(formValues, () => {
+    this.props.signIn(formValues, () => {
       this.props.history.push("posts/list");
     });
   };
@@ -86,22 +84,13 @@ class SignUp extends React.Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign In
           </Typography>
           <form
             onSubmit={this.props.handleSubmit(this.onSubmit)}
             className={classes.form}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Field
-                  name="name"
-                  type="text"
-                  component={this.renderInput}
-                  label="Username"
-                  fullWidth
-                />
-              </Grid>
               <Grid item xs={12}>
                 <Field
                   name="email"
@@ -128,18 +117,11 @@ class SignUp extends React.Component {
               variant="contained"
               color="primary"
             >
-              Sign up
+              Sign In
             </Button>
             <div className={classes.errorMessage}>
               {this.props.errorMessage}
             </div>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link component={RouterLink} to="/signin">
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
       </Container>
@@ -149,10 +131,6 @@ class SignUp extends React.Component {
 
 const validate = (formValues) => {
   const errors = {};
-
-  if (!formValues.name) {
-    errors.name = "Please enter an username";
-  }
 
   if (!formValues.email) {
     errors.email = "Please enter an email address";
@@ -171,9 +149,9 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withStyles(useStyles),
-  connect(mapStateToProps, { signUp }),
+  connect(mapStateToProps, { signIn }),
   reduxForm({
-    form: "signUpForm",
+    form: "signInForm",
     validate,
   })
-)(SignUp);
+)(SignIn);
