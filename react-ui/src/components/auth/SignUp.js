@@ -10,6 +10,9 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { signUp } from "../../actions";
 
 const useStyles = (theme) => ({
   root: {
@@ -46,6 +49,10 @@ class SignUp extends React.Component {
     return touched && error ? error : "";
   };
 
+  onSubmit = (formValues) => {
+    this.props.signUp(formValues);
+  };
+
   renderInput = ({ input, meta, label, fullWidth, type }) => {
     return (
       <>
@@ -56,7 +63,6 @@ class SignUp extends React.Component {
           {...input}
           fullWidth
           variant="outlined"
-          autoFocus
           helperText={this.renderErrorMessage(meta)}
           error={this.renderError(meta)}
           autoComplete="off"
@@ -77,7 +83,10 @@ class SignUp extends React.Component {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form}>
+          <form
+            onSubmit={this.props.handleSubmit(this.onSubmit)}
+            className={classes.form}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Field
@@ -148,9 +157,15 @@ const validate = (formValues) => {
   return errors;
 };
 
-const signUpForm = reduxForm({
-  form: "signUpForm",
-  validate,
-})(SignUp);
+// const signUpForm = (SignUp);
 
-export default withStyles(useStyles)(signUpForm);
+export default compose(
+  withStyles(useStyles),
+  connect(null, { signUp }),
+  reduxForm({
+    form: "signUpForm",
+    validate,
+  })
+)(SignUp);
+
+// withStyles(useStyles)(signUpForm);

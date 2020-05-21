@@ -5,6 +5,7 @@ const numCPUs = require("os").cpus().length;
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -46,6 +47,7 @@ if (!isDev && cluster.isMaster) {
 
   // App setup
   app.use(morgan("combined"));
+  app.use(cors());
   app.use(bodyParser.json());
   router(app);
 

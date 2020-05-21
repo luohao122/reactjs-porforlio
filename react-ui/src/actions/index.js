@@ -1,13 +1,11 @@
-import { SIGN_UP, SIGN_IN } from "./type";
+import { AUTH_USER } from "./types";
 import auth from "../apis/auth";
 
-export const signUp = (formValues) => {
-  return async (dispatch) => {
-    const response = await auth.post("/signup");
+export const signUp = (formValues) => async (dispatch) => {
+  const response = await auth.post("/signup", formValues);
 
-    dispatch({
-      type: SIGN_UP,
-      payload: response.data,
-    });
-  };
+  // dispatch({
+  //   type: AUTH_USER,
+  //   payload: response.data,
+  // });
 };

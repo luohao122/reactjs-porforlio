@@ -2,9 +2,9 @@ import React from "react";
 import { Router } from "react-router-dom";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import history from "../services/history";
-import Routes from "../routes";
-import Menu from "./menu/Menu";
+import history from "../../services/history";
+import Routes from "../../routes";
+import Menu from "../Menu/Menu";
 
 const App = () => {
   return (

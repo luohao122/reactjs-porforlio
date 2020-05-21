@@ -1,11 +1,11 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import PostCreate from "../components/posts/PostCreate";
-import PostDelete from "../components/posts/PostDelete";
-import PostEdit from "../components/posts/PostEdit";
-import PostList from "../components/posts/PostList";
-import PostShow from "../components/posts/PostShow";
-import SignUp from "../components/auth/SignUp";
+import PostCreate from "../components/Posts/PostCreate";
+import PostDelete from "../components/Posts/PostDelete";
+import PostEdit from "../components/Posts/PostEdit";
+import PostList from "../components/Posts/PostList";
+import PostShow from "../components/Posts/PostShow";
+import SignUp from "../components/Auth/SignUp";
 
 const Routes = () => {
   return (
